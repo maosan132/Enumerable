@@ -52,24 +52,58 @@ module Enumerable
   end
 =end
 
+  def my_all?
+  count = 0
+    self.my_each do |i|
+      if yield(i) then count += 1
+      end
+    end
+    puts size == count ? true : false
+  end
+
+  def my_any?
+    count = 0
+      self.my_each do |i|
+        if yield(i) then count += 1
+        end
+      end
+      puts count > 0 ? true : false
+    end
+
+  def my_none?
+    count = 0
+      self.my_each do |i|
+        if yield(i) then count += 1
+        end
+      end
+      puts count == 0 ? true : false
+    end
+
+
+  #--------------------------------
 end # end module enum
 
-  my_array = [1, 3, 4, 6, 78, 9]
-  my_range = (1..10)
-  my_hash = { one: 'one', two: 'two', three: 'three' }
-  my_strings = %w(Morris David Cris Stella)
-  fruits_in_drawer = %w[lemon, apple, lemon, apple, grape, grape, pear, peach, kiwi, banana, banana]
-  #my_array.my_each {|i| puts i }
-  
-  #my_array.my_each_with_index {|k,i| puts "#{k}: #{i}" }
-  
-  # my_range.my_each { |x| puts x }
-  
- #my_strings.select { |x|  x.size < 5 ? }
- #uits_in_drawer.my_select_without_myeach {|i| i == "lemon"}
- my_array.my_select {|i| i > 5}
- puts
-  
-  # my_strings.my_select { |x|  x.even? }
+my_array = [1, 3, 4, 6, 78, 9]
+my_range = (1..10)
+my_hash = { one: 'one', two: 'two', three: 'three' }
+my_strings = %w(Morris David Cris Stella)
+fruits_in_drawer = %w[lemon, apple, lemon, apple, grape, grape, pear, peach, kiwi, banana, banana]
+
+
+#my_array.my_each {|i| puts i }
+#my_array.my_each
+#my_array.my_each_with_index {|k,i| puts "#{k}: #{i}" }
+
+# my_range.my_each { |x| puts x }
+
+#my_strings.select { |x|  x.size < 5 ? }
+#uits_in_drawer.my_select_without_myeach {|i| i == "lemon"}
+#my_array.my_select {|i| i > 5}
+my_array.my_any? {|i| i == 5}
+puts "-*-*-*-*-*--*-"
+my_array.my_all? {|i| i == 0}
+puts
+
+# my_strings.my_select { |x|  x.even? }
   
   puts "-------this is the eof------------"
