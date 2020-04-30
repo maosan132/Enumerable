@@ -1,4 +1,4 @@
-# Project Name
+# Enumerable methods rebuild
 
 > One paragraph statement about the project.
 
@@ -43,15 +43,9 @@ To get a local copy up and running follow these simple example steps.
 
 👤 **Author1**
 
-- Github: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
-
-👤 **Author2**
-
-- Github: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
+- Github: maosan132
+- Twitter: @maosan132
+- Linkedin: mauricio-santos-a7292910
 
 ## 🤝 Contributing
 
