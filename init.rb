@@ -79,6 +79,14 @@ module Enumerable
       puts count == 0 ? true : false
     end
 
+    
+
+  def my_map
+    ary = []
+    self.my_each {|i| }
+
+
+
 
   #--------------------------------
 end # end module enum
