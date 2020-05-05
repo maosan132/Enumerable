@@ -101,101 +101,22 @@ module Enumerable
     print ary
   end
 
-  def my_inject3(arg = nil)
-    each { |i| memo = arg ? yield(memo, i) : i}
-    memo
-  end
-
-  def my_inject2(memo = nil)
-    my_each { |i| memo = memo.nil? ? x : yield(memo, i) }
-    puts memo
-  end
-
-  def my_inject4(arg = nil)
-    for i in self
-     arg = arg.nil? ? i : yield(arg, i) 
-    end
-    puts arg
-  end
-
-
- def my_inject(arg = nil)    
-    memo = arg ? arg : self[0]
-    # self.my_each do |i|
-    #   yield
-    for i in 0...length
-      puts "#{memo}:#{self[i]} Results=#{yield(memo,self[i])}"
-      memo = yield(memo,self[i])
-    end
-    return memo
-  end
-
-
-  def my_inject5(arg = nil)
-    # if no initial value given then
-    arg ? total = arg : total = self[0]
-    for i in 1..self.length
-      total = yield(total, i)
-    end
-    puts total
-  end
-
-  def my_inject6(arg = nil, operation = nil)
-    if arg.is_a?(Symbol) || (!arg && block_given?)
+  def my_inject6(arg = nil)
+    # arg was not given and block was
+    if !arg && block_given?
       memo = self[0]
       first_memo = self[1..-1]
-    else
+    else # arg was given
       memo = arg
       first_memo = self
     end
-    symbol = operation || (arg.respond_to?(Symbol) ? arg : nil)
     first_memo.my_each do |i|
-      memo = memo.send(symbol, i) if symbol
-      memo = yield(memo, i) if block_given?
+    memo = yield(memo, i) if block_given?
     end
     puts memo
   end
 
-  def my_inject7(memo=nil)
-    unless memo
-      memo = self[0]
-      start = 1
-    else
-      start = 0
-    end
-    start.upto(self.size - 1) { |i| memo = yield(memo, self[i]) }
-    memo
-  end
 
-  def my_inject8(initial = nil, sym = nil)
-    case 
-    when initial.is_a?(Symbol)
-      sym = initial
-      memo = self[0]
-      self[1..-1].my_each do |x|
-        memo = memo.send(sym, x)
-      end
-      puts memo
-    when initial && sym
-      memo = initial
-      self.my_each do |x|
-        memo = memo.send(sym,x)
-      end
-      puts memo
-    when initial && block_given?
-      memo = initial
-      self.my_each do |x|
-        memo = yield(memo,x)
-      end
-      puts memo
-    when block_given?
-      memo = self[0]
-      self[1..-1].my_each do |x|
-        memo = yield(memo,x)
-      end
-      puts memo
-    end
-  end
   #--------------------------------
 end
 # end module enum
@@ -221,10 +142,10 @@ fruits_in_drawer = %w[lemon, apple, lemon, apple, grape, grape, pear, peach, kiw
 # my_array.my_count()
 # my_array.my_count(3)
 # my_array.my_count {|i| i > 5}
-my_array.my_inject8(2, :+)
-my_array.my_inject8(:+)
-my_array.my_inject8(2) {|m,i| m+i}
-my_array.my_inject8 {|m,i| m+i}
+# my_array.my_inject6(2, :+)
+# my_array.my_inject6(:+)
+my_array.my_inject6(2) {|m,i| m+i}
+my_array.my_inject6 {|m,i| m+i}
 #my_array.my_map {|i| i * 2}
 puts "-*-*-*-*-*--*-"
 # my_array.my_all? {|i| i == 0}
