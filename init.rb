@@ -93,7 +93,7 @@ module Enumerable
   end
   
   def my_map
-    return to_enum :my_each unless block_given?
+    return to_enum :my_map unless block_given?
     ary = []
     self.my_each do |i| 
       ary << yield(i)        
@@ -103,6 +103,8 @@ module Enumerable
 
 
   def my_inject(arg = nil)
+    memo = arg ? arg : self[0]
+    puts memo
   end
   #--------------------------------
 end
@@ -126,9 +128,10 @@ fruits_in_drawer = %w[lemon, apple, lemon, apple, grape, grape, pear, peach, kiw
 # my_array.my_select {|i| i > 5}
 # my_array.my_any? {|i| i == 5}
 
-my_array.my_count()
-my_array.my_count(3)
- my_array.my_count {|i| i > 5}
+# my_array.my_count()
+# my_array.my_count(3)
+# my_array.my_count {|i| i > 5}
+my_array.my_inject
 
 #my_array.my_map {|i| i * 2}
 puts "-*-*-*-*-*--*-"
