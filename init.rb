@@ -101,7 +101,7 @@ module Enumerable
     print ary
   end
 
-  def my_inject6(arg = nil)
+  def my_inject(arg = nil)
     # arg was not given and block was
     if !arg && block_given?
       memo = self[0]
@@ -115,10 +115,13 @@ module Enumerable
     end
     puts memo
   end
-
-
   #--------------------------------
 end
+
+def multiply_els(arr)
+  arr.my_inject {|memo, i| memo * i }
+end
+
 # end module enum
 
 my_array = [1, 3, 4, 6, 78, 9, 3]
@@ -144,13 +147,17 @@ fruits_in_drawer = %w[lemon, apple, lemon, apple, grape, grape, pear, peach, kiw
 # my_array.my_count {|i| i > 5}
 # my_array.my_inject6(2, :+)
 # my_array.my_inject6(:+)
-my_array.my_inject6(2) {|m,i| m+i}
-my_array.my_inject6 {|m,i| m+i}
+my_array.my_inject(2) {|m,i| m+i}
+my_array.my_inject {|m,i| m+i}
+
+multiply_els(my_array)
 #my_array.my_map {|i| i * 2}
 puts "-*-*-*-*-*--*-"
 # my_array.my_all? {|i| i == 0}
 puts
 
 # my_strings.my_select { |x|  x.even? }
+
+
   
   puts "-------this is the eof------------"
