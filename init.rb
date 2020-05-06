@@ -1,4 +1,5 @@
-require 'enumerable.rb' 
+require_relative 'enumerable.rb' 
+include Enumerable
 
 def multiply_els(arr)
   arr.my_inject { |memo, i| memo * i }

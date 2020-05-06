@@ -27,6 +27,7 @@ module Enumerable
       ary << i if yield(i)      
     end
     print ary
+  end
 
   def my_all?
     count = 0
