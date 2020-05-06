@@ -18,10 +18,12 @@ my_strings = %w(Morris David Cris Stella)
 
 # my_strings.select { |x|  x.size < 5 ? }
 # my_strings.my_select_without_myeach { |i| i == "lemon"}
-n = my_hash.my_select { |k,i| i == "one"}
-puts n
-puts n.class
-# my_array.my_any? { |i| i == 5}
+# n = my_hash.my_select { |k,i| i == "one"}
+# puts n
+# puts n.class
+my_array.my_all? { |i| i == 5}
+my_range.my_any? { |i| i == 5}
+my_array.my_none? { |i| i == 5}
 
 # my_array.my_count()
 # my_array.my_count(3)
@@ -35,7 +37,8 @@ puts n.class
 # my_strings.my_select { |x|  x.even? }
 
 puts "->normal enumerables:"
-m = my_hash.select { |k,v| v != nil}
-puts n
-puts m.class
-
+a = my_array.all? { |i| i == 5}
+b = my_range.any? { |i| i == 5}
+c = my_array.none? { |i| i == 5}
+d = my_array.all?
+puts "#{a} #{b} #{c} #{d}"

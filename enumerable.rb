@@ -27,17 +27,38 @@ module Enumerable
       helper = []
       my_each { |i| helper << i if yield(i) }
     end
-    return helper
+    helper
   end
 
-  def my_all?
-    count = 0
-    my_each do |i|
-      count += 1 if yield(i)
+  # def my_all?(arg = nil)
+  #   return true unless block_given?
+
+  #   count = 0
+  #   my_each do |i|
+  #     no_nil = i == false || nil ? false : true
+  #     count += 1 if yield(i)
+  #   end
+  #   size == count ? true : false
+    
+  # end
+
+  def my_all?(arg = nil)
+    query_result = false
+    if arg.nil? && !block_given?
+      my_each { |i| query_result = true unless x.nil? || !i }
+    elsif arg.nil?
+      my_each { |i| query_result = true if yield(i) }
+    elsif arg.is_a? Regexp
+      my_each { |i| query_result = true if i.match(arg) }
+    elsif arg.is_a? :class
+      my_each { |i| query_result = true if i.is_a?(arg) }
+    else
+      my_each { |i| query_result = true if i == arg }
     end
-    size == count ? true : false
+    query_result
   end
   
+  case 
   def my_any?
     count = 0
     my_each do |i|
