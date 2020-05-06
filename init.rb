@@ -8,13 +8,13 @@ end
 
 
 my_array = [1, 3, 4, 6, 78, 9, 3]
-my_range = (1..10)
+my_range = 1..10
 my_hash = { one: 'one', two: 'two', three: 'three' }
 my_strings = %w(Morris David Cris Stella)
 
 
 # my_array.my_each { |i| puts i }
-my_array.my_each_with_index { |k,i| puts "#{k}: #{i}" }
+my_range.my_each_with_index { |k,i| puts "#{k}: #{i}" }
 
 # my_strings.select { |x|  x.size < 5 ? }
 # my_strings.my_select_without_myeach { |i| i == "lemon"}
@@ -32,6 +32,6 @@ my_array.my_each_with_index { |k,i| puts "#{k}: #{i}" }
 
 # my_strings.my_select { |x|  x.even? }
 
-puts "normal enumerables"
-my_array.each_with_index { |k,i| puts "#{k}: #{i}" }
+puts "->normal enumerables:"
+my_range.each_with_index { |k,i| puts "#{k}: #{i}" }
 

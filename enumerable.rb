@@ -2,7 +2,7 @@ module Enumerable
   def my_each
     return to_enum :my_each unless block_given?
 
-    for i in self
+    for i in arr
       yield(i)
     end
     self
@@ -12,8 +12,8 @@ module Enumerable
   def my_each_with_index
     return to_enum :my_each unless block_given?
 
-    for i in 0...length
-      yield(i, self[i])
+    for i in 0...size
+      yield(to_a[i], i)
     end
   end
 
@@ -24,7 +24,7 @@ module Enumerable
     my_each do |i|
       # check = yield(i)
       # if yield i
-      ary << i if yield(i)      
+      ary << i if yield(i)
     end
     print ary
   end
