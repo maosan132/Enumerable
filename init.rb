@@ -23,8 +23,7 @@ module Enumerable
     my_each do |i|
       # check = yield(i)
       # if yield i
-      ary << i if yield(i)
-      end
+      ary << i if yield(i)      
     end
     print ary
   end
@@ -102,11 +101,13 @@ module Enumerable
   #--------------------------------
 end
 
+# end module enum
+
 def multiply_els(arr)
   arr.my_inject { |memo, i| memo * i }
 end
 
-# end module enum
+
 
 my_array = [1, 3, 4, 6, 78, 9, 3]
 my_range = (1..10)
@@ -115,8 +116,8 @@ my_strings = %w(Morris David Cris Stella)
 fruits_in_drawer = %w[lemon, apple, lemon, apple, grape, grape, pear, peach, kiwi, banana, banana]
 
 
-# my_array.my_each { |i| puts i }
-# my_array.my_each
+my_array.my_each { |i| puts i }
+my_array.my_each
 # my_array.my_each_with_index { |k,i| puts "#{k}: #{i}" }
 
 # my_range.my_each { |x| puts x }
@@ -136,12 +137,6 @@ my_array.my_inject { |m,i| m + i}
 
 multiply_els(my_array)
 #my_array.my_map { |i| i * 2}
-puts "-*-*-*-*-*--*-"
 # my_array.my_all? { |i| i == 0}
-puts
 
 # my_strings.my_select { |x|  x.even? }
-
-
-  
-puts "-------this is the eof------------"
