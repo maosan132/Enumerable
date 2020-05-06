@@ -2,7 +2,7 @@ module Enumerable
   def my_each
     return to_enum :my_each unless block_given?
 
-    for i in arr
+    for i in self
       yield(i)
     end
     self
@@ -18,15 +18,16 @@ module Enumerable
   end
 
   def my_select
-    return to_enum :my_each unless block_given?
+    return to_enum :my_select unless block_given?
 
-    ary = []
-    my_each do |i|
-      # check = yield(i)
-      # if yield i
-      ary << i if yield(i)
+    if is_a? Hash
+      helper = {}
+      my_each { |k, v| helper[k] = v if yield k, v }
+    else
+      helper = []
+      my_each { |i| helper << i if yield(i) }
     end
-    print ary
+    return helper
   end
 
   def my_all?

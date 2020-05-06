@@ -13,12 +13,14 @@ my_hash = { one: 'one', two: 'two', three: 'three' }
 my_strings = %w(Morris David Cris Stella)
 
 
-# my_array.my_each { |i| puts i }
-my_range.my_each_with_index { |k,i| puts "#{k}: #{i}" }
+#my_array.my_each { |i| puts i }
+#my_strings.my_each_with_index { |k,i| puts "#{k}: #{i}" }
 
 # my_strings.select { |x|  x.size < 5 ? }
 # my_strings.my_select_without_myeach { |i| i == "lemon"}
-# my_array.my_select { |i| i > 5}
+n = my_hash.my_select { |k,i| i == "one"}
+puts n
+puts n.class
 # my_array.my_any? { |i| i == 5}
 
 # my_array.my_count()
@@ -33,5 +35,7 @@ my_range.my_each_with_index { |k,i| puts "#{k}: #{i}" }
 # my_strings.my_select { |x|  x.even? }
 
 puts "->normal enumerables:"
-my_range.each_with_index { |k,i| puts "#{k}: #{i}" }
+m = my_hash.select { |k,v| v != nil}
+puts n
+puts m.class
 
