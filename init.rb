@@ -21,27 +21,30 @@ my_strings = %w(Morris David Cris Stella)
 # n = my_hash.my_select { |k,i| i == "one"}
 # puts n
 # puts n.class
-puts my_hash.my_none?(6)
-puts my_hash.my_any? { |i| i == 5}
-puts my_hash.my_none? { |i| i == 5}
+# puts my_hash.my_none?(6)
+# puts my_hash.my_any? { |i| i == 5}
+# puts my_hash.my_none? { |i| i == 5}
 
 # my_array.my_count()
 # my_array.my_count(3)
 # my_array.my_count { |i| i > 5}
 # my_array.my_inject6(2, :+)
 # my_array.my_inject6(:+)
- 
-#my_array.my_map { |i| i * 2}
+puts my_hash.my_map { |k,i| i+i }
+puts my_strings.my_map { |i| i+i }
+proc = proc {|i| i * 2 }
 # my_array.my_all? { |i| i == 0}
 
 # my_strings.my_select { |x|  x.even? }
 
 puts "->normal enumerables:"
-puts a = my_hash.none?(6)
-b = my_hash.any? { |i| i == 5}
-c = my_hash.none? { |i| i == 5}
-d = my_hash.all?
-puts "-----------#{a} #{b} #{c} #{d}"
+puts my_hash.map { |k,i| i+i }
+
+# puts a = my_hash.none?(6)
+# b = my_hash.any? { |i| i == 5}
+# c = my_hash.none? { |i| i == 5}
+# d = my_hash.all?
+# puts "-----------#{a} #{b} #{c} #{d}"
 
 # def my_count(arg = nil)
 #   count = 0

@@ -2,7 +2,7 @@ module Enumerable
   def my_each
     return to_enum :my_each unless block_given?
 
-    for i in self
+    for i in self   # rubocop suggest the use of a while, but it adds a new line, so I passed
       yield(i)
     end
     self
@@ -22,7 +22,7 @@ module Enumerable
 
     if is_a? Hash
       helper = {}
-      my_each { |k, v| helper[k] = v if yield k, v }
+      my_each { |k, v| helper[k] = v if yield(k, v) }
     else
       helper = []
       my_each { |i| helper << i if yield(i) }
@@ -92,7 +92,7 @@ module Enumerable
     end
     query_result
   end
-  
+
   # end
   # def my_none?
   #   count = 0
@@ -119,15 +119,33 @@ module Enumerable
     query_result
   end
 
+  # first attempt to map, point 10 :
+
   def my_map
     return to_enum :my_map unless block_given?
 
     ary = []
-    my_each do |i|
-      ary << yield(i)
-    end
-    print ary
+    my_each { |i| ary << yield(i) }
+    puts ary
   end
+
+  # second attempt to map, point 13 :
+
+  def my_map_proc(proc = nil)
+    return to_enum :my_map_proc unless block_given?
+
+    ary = []
+    my_each { |i| ary << proc ? proc.call(i) : yield(i) }
+    ary
+  end
+
+  # def my_map_proc(&block)
+  #   return to_enum :my_map_proc unless block_given?
+
+  #   ary = []
+  #   my_each { |i| ary << block.call(x) }
+  #   puts ary
+  # end
 
   def my_inject(arg = nil)
     # arg was not given and block was
@@ -139,7 +157,7 @@ module Enumerable
       first_memo = self
     end
     first_memo.my_each do |i|
-    memo = yield(memo, i) if block_given?
+      memo = yield(memo, i) if block_given?
     end
     puts memo
   end
