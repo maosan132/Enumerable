@@ -21,9 +21,9 @@ my_strings = %w(Morris David Cris Stella)
 # n = my_hash.my_select { |k,i| i == "one"}
 # puts n
 # puts n.class
-my_array.my_all? { |i| i == 5}
-my_range.my_any? { |i| i == 5}
-my_array.my_none? { |i| i == 5}
+my_array.my_any? {|i| i == 6}
+# my_range.my_any? { |i| i == 5}
+# my_array.my_none? { |i| i == 5}
 
 # my_array.my_count()
 # my_array.my_count(3)
@@ -37,8 +37,16 @@ my_array.my_none? { |i| i == 5}
 # my_strings.my_select { |x|  x.even? }
 
 puts "->normal enumerables:"
-a = my_array.all? { |i| i == 5}
+puts a = my_array.any? {|i| i == 6}
 b = my_range.any? { |i| i == 5}
 c = my_array.none? { |i| i == 5}
 d = my_array.all?
-puts "#{a} #{b} #{c} #{d}"
+puts "-----------#{a} #{b} #{c} #{d}"
+
+# def my_count(arg = nil)
+#   count = 0
+#   count = size if !block_given? && arg.nil?
+#   my_each { |i| count += 1 unless i != arg } if arg
+#   my_each { |i| count += 1 if yield(i) } if block_given?
+#   puts count
+# end  

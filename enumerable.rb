@@ -44,8 +44,8 @@ module Enumerable
 
   def my_all?(arg = nil)
     query_result = false
-    if arg.nil? && !block_given?
-      my_each { |i| query_result = true unless x.nil? || !i }
+    if !block_given? && arg.nil?
+      my_each { |i| query_result = true unless !i || i.nil?}
     elsif arg.nil?
       my_each { |i| query_result = true if yield(i) }
     elsif arg.is_a? Regexp
@@ -58,26 +58,16 @@ module Enumerable
     query_result
   end
   
-  case 
-  def my_any?
-    count = 0
-    my_each do |i|
-      if yield(i) then count += 1
-      end
-      return true if count == 1
-    end
-    # puts count > 0 ? true : false
-    false
-  end
-
-  def my_none?
-    count = 0
-      my_each do |i|
-        if yield(i) then count += 1
-        end
-      end
-      puts count == 0 ? true : false
-  end
+  # def my_any?
+  #   count = 0
+  #   my_each do |i|
+  #     if yield(i) then count += 1
+  #     end
+  #     return true if count == 1
+  #   end
+  #   # puts count > 0 ? true : false
+  #   false
+  # end
 
   def my_count(arg = nil)
     count = 0
@@ -85,7 +75,59 @@ module Enumerable
     my_each { |i| count += 1 unless i != arg } if arg
     my_each { |i| count += 1 if yield(i) } if block_given?
     puts count
-  end  
+  end
+
+  def my_any?(arg = nil)
+    query_result = false
+    if !block_given? && arg.nil?
+      my_each { |i| query_result = true unless i.nil? || !i }
+    elsif arg.nil?
+      self.my_count { yield }
+      check = check > 0
+      puts "check #{check}"
+      #query_result = true if 
+      # my_each { |i| query_result = true if yield(i) }
+    elsif arg.is_a? Regexp
+      my_each { |i| query_result = true if i.match(arg) }
+    elsif arg.is_a? :class
+      my_each { |i| query_result = true if i.is_a?(arg) }
+    else
+      my_each { |i| query_result = true if i == arg }
+    end
+    puts query_result
+  end
+
+
+  # def my_any(arg = nil)
+
+  #   self.my_count {}
+
+
+  # end
+  # def my_none?
+  #   count = 0
+  #     my_each do |i|
+  #       if yield(i) then count += 1
+  #       end
+  #     end
+  #     puts count == 0 ? true : false
+  # end
+
+  def my_none?(arg = nil)
+    query_result = true
+    if !block_given? && arg.nil?
+      my_each { |i| query_result = false unless i.nil? || !i }
+    elsif arg.nil?
+      my_each { |i| query_result = false if yield(i) }
+    elsif arg.is_a? Regexp
+      my_each { |i| query_result = false if i.match(arg) }
+    elsif arg.is_a? :class
+      my_each { |i| query_result = false if i.is_a?(arg) }
+    else
+      my_each { |i| query_result = false if i == arg }
+    end
+    puts query_result
+  end
 
   def my_map
     return to_enum :my_map unless block_given?
