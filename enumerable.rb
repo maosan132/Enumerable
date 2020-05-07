@@ -1,12 +1,13 @@
+# rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+# rubocop: disable Metrics/ModuleLength
 module Enumerable
   def my_each
     return to_enum :my_each unless block_given?
 
-    for i in self   # rubocop suggest the use of a while, but it adds a new line, so I passed
+    for i in self
       yield(i)
     end
     self
-    puts
   end
 
   def my_each_with_index
@@ -30,44 +31,21 @@ module Enumerable
     helper
   end
 
-  # def my_all?(arg = nil)
-  #   return true unless block_given?
-
-  #   count = 0
-  #   my_each do |i|
-  #     no_nil = i == false || nil ? false : true
-  #     count += 1 if yield(i)
-  #   end
-  #   size == count ? true : false
-    
-  # end
-
   def my_all?(args = nil)
-    query_result  = true
+    query_result = true
     if args.nil? && !block_given?
-      my_each { |i| query_result  = false if !i|| i.nil?  }
+      my_each { |i| query_result = false if !i || i.nil? }
     elsif args.nil?
-      my_each { |i| query_result  = false unless yield(i) }
+      my_each { |i| query_result = false unless yield(i) }
     elsif args.is_a? Regexp
-      my_each { |i| query_result  = false unless i.match(args) }
+      my_each { |i| query_result = false unless i.match(args) }
     elsif args.is_a? Module
-      my_each { |i| query_result  = false unless i.is_a?(args) }
+      my_each { |i| query_result = false unless i.is_a?(args) }
     else
-      my_each { |i| query_result  = false unless i == args }
+      my_each { |i| query_result = false unless i == args }
     end
     query_result
   end
-  
-  # def my_any?
-  #   count = 0
-  #   my_each do |i|
-  #     if yield(i) then count += 1
-  #     end
-  #     return true if count == 1
-  #   end
-  #   # puts count > 0 ? true : false
-  #   false
-  # end
 
   def my_count(arg = nil)
     count = 0
@@ -82,26 +60,16 @@ module Enumerable
     if !block_given? && arg.nil?
       my_each { |i| query_result = true unless i.nil? || !i }
     elsif arg.nil?
-      query_result = true if count { |i| yield(i) } > 0
+      query_result = true if count { |i| yield(i) }.positive?
     elsif arg.is_a? Regexp
       my_each { |i| query_result = true if i.match(arg) }
     elsif arg.is_a? Module
       my_each { |i| query_result = true if i.is_a?(arg) }
     else
-      query_result = true if count(arg) > 0
+      count(arg).positive? ? query_result = true : next
     end
     query_result
   end
-
-  # end
-  # def my_none?
-  #   count = 0
-  #     my_each do |i|
-  #       if yield(i) then count += 1
-  #       end
-  #     end
-  #     puts count == 0 ? true : false
-  # end
 
   def my_none?(arg = nil)
     query_result = true
@@ -119,8 +87,6 @@ module Enumerable
     query_result
   end
 
-  # first attempt to map, point 10 :
-
   def my_map
     return to_enum :my_map unless block_given?
 
@@ -128,8 +94,6 @@ module Enumerable
     my_each { |i| ary << yield(i) }
     puts ary
   end
-
-  # second attempt to map, point 13 :
 
   def my_map_proc(proc = nil)
     return to_enum :my_map_proc unless block_given?
@@ -139,20 +103,11 @@ module Enumerable
     ary
   end
 
-  # def my_map_proc(&block)
-  #   return to_enum :my_map_proc unless block_given?
-
-  #   ary = []
-  #   my_each { |i| ary << block.call(x) }
-  #   puts ary
-  # end
-
   def my_inject(arg = nil)
-    # arg was not given and block was
     if !arg && block_given?
       memo = self[0]
       first_memo = self[1..-1]
-    else # arg was given
+    else
       memo = arg
       first_memo = self
     end
@@ -161,5 +116,11 @@ module Enumerable
     end
     puts memo
   end
+end
 
+# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+# rubocop: enable Metrics/ModuleLength
+
+def multiply_els(arr)
+  arr.my_inject { |memo, i| memo * i }
 end
