@@ -42,18 +42,18 @@ module Enumerable
     
   # end
 
-  def my_all?(arg = nil)
-    query_result = false
-    if !block_given? && arg.nil?
-      my_each { |i| query_result = true unless !i || i.nil?}
-    elsif arg.nil?
-      my_each { |i| query_result = true if yield(i) }
-    elsif arg.is_a? Regexp
-      my_each { |i| query_result = true if i.match(arg) }
-    elsif arg.is_a? :class
-      my_each { |i| query_result = true if i.is_a?(arg) }
+  def my_all?(args = nil)
+    query_result  = true
+    if args.nil? && !block_given?
+      my_each { |i| query_result  = false if !i|| i.nil?  }
+    elsif args.nil?
+      my_each { |i| query_result  = false unless yield(i) }
+    elsif args.is_a? Regexp
+      my_each { |i| query_result  = false unless i.match(args) }
+    elsif args.is_a? Module
+      my_each { |i| query_result  = false unless i.is_a?(args) }
     else
-      my_each { |i| query_result = true if i == arg }
+      my_each { |i| query_result  = false unless i == args }
     end
     query_result
   end
@@ -82,27 +82,17 @@ module Enumerable
     if !block_given? && arg.nil?
       my_each { |i| query_result = true unless i.nil? || !i }
     elsif arg.nil?
-      self.my_count { yield }
-      check = check > 0
-      puts "check #{check}"
-      #query_result = true if 
-      # my_each { |i| query_result = true if yield(i) }
+      query_result = true if count { |i| yield(i) } > 0
     elsif arg.is_a? Regexp
       my_each { |i| query_result = true if i.match(arg) }
-    elsif arg.is_a? :class
+    elsif arg.is_a? Module
       my_each { |i| query_result = true if i.is_a?(arg) }
     else
-      my_each { |i| query_result = true if i == arg }
+      query_result = true if count(arg) > 0
     end
-    puts query_result
+    query_result
   end
-
-
-  # def my_any(arg = nil)
-
-  #   self.my_count {}
-
-
+  
   # end
   # def my_none?
   #   count = 0
@@ -121,12 +111,12 @@ module Enumerable
       my_each { |i| query_result = false if yield(i) }
     elsif arg.is_a? Regexp
       my_each { |i| query_result = false if i.match(arg) }
-    elsif arg.is_a? :class
+    elsif arg.is_a? Module
       my_each { |i| query_result = false if i.is_a?(arg) }
     else
       my_each { |i| query_result = false if i == arg }
     end
-    puts query_result
+    query_result
   end
 
   def my_map

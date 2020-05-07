@@ -21,9 +21,9 @@ my_strings = %w(Morris David Cris Stella)
 # n = my_hash.my_select { |k,i| i == "one"}
 # puts n
 # puts n.class
-my_array.my_any? {|i| i == 6}
-# my_range.my_any? { |i| i == 5}
-# my_array.my_none? { |i| i == 5}
+puts my_hash.my_none?(6)
+puts my_hash.my_any? { |i| i == 5}
+puts my_hash.my_none? { |i| i == 5}
 
 # my_array.my_count()
 # my_array.my_count(3)
@@ -37,10 +37,10 @@ my_array.my_any? {|i| i == 6}
 # my_strings.my_select { |x|  x.even? }
 
 puts "->normal enumerables:"
-puts a = my_array.any? {|i| i == 6}
-b = my_range.any? { |i| i == 5}
-c = my_array.none? { |i| i == 5}
-d = my_array.all?
+puts a = my_hash.none?(6)
+b = my_hash.any? { |i| i == 5}
+c = my_hash.none? { |i| i == 5}
+d = my_hash.all?
 puts "-----------#{a} #{b} #{c} #{d}"
 
 # def my_count(arg = nil)
