@@ -1,8 +1,6 @@
 # Enumerable methods rebuild
 
-This project goal was to rebuild some Ruby's built-in Enumerables methods, each, each_with_index, select, any?, all?, none? count, map and inject. 
-
-> One paragraph statement about the project.
+> This project goal was to rebuild some Ruby's built-in Enumerables methods, each, each_with_index, select, any?, all?, none? count, map and inject. 
 
 ## Built With
 
@@ -10,15 +8,14 @@ This project goal was to rebuild some Ruby's built-in Enumerables methods, each,
 
 ## Getting Started
 
-To see the code you can click [here] (https://github.com/maosan132/Enumerable/blob/develop/enumerable.rb)
+To see the code you can click [here](https://github.com/maosan132/Enumerable/blob/develop/enumerable.rb)
 
 ## Authors
 
-👤 **Mauricio Santos**
+👤 **Author**
 
-- Github: maosan132
-- Twitter: @maosan132
-- Linkedin: mauricio-santos-a7292910
+- Github: [@maosan132](https://github.com/maosan132)
+- Linkedin: [@maosan132](https://www.linkedin.com/in/mauricio-santos-a7292910/)
 
 ## 🤝 Contributing
 
