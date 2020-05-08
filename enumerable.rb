@@ -66,7 +66,7 @@ module Enumerable
     elsif arg.is_a? Module
       my_each { |i| query_result = true if i.is_a?(arg) }
     else
-      count(arg).positive? ? query_result = true : break
+      count(arg).positive? ? query_result = true : query_result = false
     end
     query_result
   end
@@ -124,3 +124,8 @@ end
 def multiply_els(arr)
   arr.my_inject { |memo, i| memo * i }
 end
+
+my_strings = %w(Morris David Cris Stella)
+puts 
+puts my_strings.my_any?("ssss")
+puts my_strings.any?("dsdsd")
