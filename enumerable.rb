@@ -66,7 +66,7 @@ module Enumerable
     elsif arg.is_a? Module
       my_each { |i| query_result = true if i.is_a?(arg) }
     else
-      count(arg).positive? ? query_result = true : next
+      count(arg).positive? ? query_result = true : break
     end
     query_result
   end
