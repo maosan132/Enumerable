@@ -8,6 +8,11 @@
 
 ## Getting Started
 
+- Install Ruby from [here](https://rubyinstaller.org/)
+- Clone repository from [here](https://github.com/maosan132/Enumerable.git)
+- Run the file in the command line typing ruby enumerable.rb
+
+
 To see the code you can click [here](https://github.com/maosan132/Enumerable/blob/develop/enumerable.rb)
 
 ## Authors
