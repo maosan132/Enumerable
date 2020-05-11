@@ -1,51 +1,26 @@
 # Enumerable methods rebuild
 
-> One paragraph statement about the project.
-
-![screenshot](./app_screenshot.png)
-
-Additional description about the project and its features.
+> This project goal was to rebuild some Ruby's built-in Enumerables methods, each, each_with_index, select, any?, all?, none? count, map and inject. 
 
 ## Built With
 
-- Major languages,
-- frameworks,
-- technologies used
-
-## Live Demo
-
-[Live Demo Link](https://livedemo.com)
-
+- Ruby 2.6
 
 ## Getting Started
 
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
+- Install Ruby from [here](https://rubyinstaller.org/)
+- Clone repository from [here](https://github.com/maosan132/Enumerable.git)
+- Run the file in the command line typing ruby enumerable.rb
 
 
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-### Setup
-
-### Install
-
-### Usage
-
-### Run tests
-
-### Deployment
-
-
+To see the code you can click [here](https://github.com/maosan132/Enumerable/blob/develop/enumerable.rb)
 
 ## Authors
 
-👤 **Author1**
+👤 **Author**
 
-- Github: maosan132
-- Twitter: @maosan132
-- Linkedin: mauricio-santos-a7292910
+- Github: [@maosan132](https://github.com/maosan132)
+- Linkedin: [@maosan132](https://www.linkedin.com/in/mauricio-santos-a7292910/)
 
 ## 🤝 Contributing
 
