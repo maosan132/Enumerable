@@ -103,20 +103,6 @@ module Enumerable
     ary
   end
 
-  def my_inject(arg = nil)
-    if !arg && block_given?
-      memo = self[0]
-      first_memo = self[1..-1]
-    else
-      memo = arg
-      first_memo = self
-    end
-    first_memo.my_each do |i|
-      memo = yield(memo, i) if block_given?
-    end
-    memo
-  end
-
   def my_inject3(*arg)
     memo, operator = nil
     if arg[0].is_a?(Symbol)
@@ -134,29 +120,9 @@ module Enumerable
   end
 end
 
-
-
 # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 # rubocop: enable Metrics/ModuleLength
 
 def multiply_els(arr)
   arr.my_inject { |memo, i| memo * i }
 end
-
-my_array = [1, 3, 4, 6, 78, 9, 3]
-my_range = 1..10
-my_hash = { one: 'one', two: 'two', three: 'three' }
-my_strings = %w(Morris David Cris Stella)
-
-puts 
-arra = my_array.my_inject3(1000) {|memo, i| memo = i * memo}
-puts arra.class
-puts arra
-puts "------------"
-arra2 = my_array.inject(1000) {|memo, i| memo = i * memo}
-puts arra2.class
-puts arra2
-
-# puts my_strings.my_any?("ssss")
-# puts my_strings.my_any?
-# puts my_strings.any?("dsdsd")
