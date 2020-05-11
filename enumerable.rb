@@ -95,15 +95,6 @@ module Enumerable
     ary
   end
 
-  def my_map2
-    return to_enum(:my_each) unless block_given?
-    arr = []
-    my_each do |item|
-      arr.push(yield item)
-    end
-    arr
-  end
-
   def my_map_proc(proc = nil)
     return to_enum :my_map_proc unless block_given?
 
@@ -125,7 +116,37 @@ module Enumerable
     end
     memo
   end
+  
+  def my_inject2(memo = 0, operator = nil)  
+    arr = is_a?(Array) || is_a?(Range) ? self : to_a    
+    if memo.is_a?(Symbol)
+      operator = memo
+      memo = 0
+    end
+    if operator.is_a?(Symbol)
+      if operator == :+
+      memo = arr.my_inject(memo) { |acum, i| acum + i }
+      elsif operator == :-
+      memo = arr.my_inject(memo) { |acum, i| acum - i }
+      elsif operator == :*
+      memo = arr.my_inject(memo) { |acum, i| acum * i }
+      elsif operator == :/
+      memo = arr.my_inject(memo) { |acum, i| acum / i }
+      end
+    else
+      if memo.zero?
+        memo = arr[0]
+        arr.shift
+      end
+      arr.my_each do |i|
+        memo = yield(memo, i)
+      end
+    end
+    memo
+  end
 end
+
+
 
 # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 # rubocop: enable Metrics/ModuleLength
@@ -140,11 +161,11 @@ my_hash = { one: 'one', two: 'two', three: 'three' }
 my_strings = %w(Morris David Cris Stella)
 
 puts 
-arra = my_array.my_inject {|i| i + 78}
+arra = my_range.my_inject2(:+)
 puts arra.class
 puts arra
 puts "------------"
-arra2 = my_array.inject {|i| i + 78}
+arra2 = my_range.inject(:+)
 puts arra2.class
 puts arra2
 
