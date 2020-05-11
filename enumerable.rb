@@ -103,7 +103,7 @@ module Enumerable
     ary
   end
 
-  def my_inject3(*arg)
+  def my_inject(*arg)
     memo, operator = nil
     if arg[0].is_a?(Symbol)
       operator = arg[0]
