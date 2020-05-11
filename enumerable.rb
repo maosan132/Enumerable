@@ -52,7 +52,7 @@ module Enumerable
     count = size if !block_given? && arg.nil?
     my_each { |i| count += 1 unless i != arg } if arg
     my_each { |i| count += 1 if yield(i) } if block_given?
-    puts count
+    count
   end
 
   def my_any?(arg = nil)
@@ -125,7 +125,17 @@ def multiply_els(arr)
   arr.my_inject { |memo, i| memo * i }
 end
 
+my_array = [1, 3, 4, 6, 78, 9, 3]
+my_range = 1..10
+my_hash = { one: 'one', two: 'two', three: 'three' }
 my_strings = %w(Morris David Cris Stella)
+
 puts 
-puts my_strings.my_any?("ssss")
-puts my_strings.any?("dsdsd")
+puts my_array.my_count {|i| i == 78}
+puts my_array.my_count2 {|i| i == 78}
+puts "------------"
+puts my_array.count {|i| i == 78}
+
+# puts my_strings.my_any?("ssss")
+# puts my_strings.my_any?
+# puts my_strings.any?("dsdsd")
