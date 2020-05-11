@@ -92,7 +92,16 @@ module Enumerable
 
     ary = []
     my_each { |i| ary << yield(i) }
-    puts ary
+    ary
+  end
+
+  def my_map2
+    return to_enum(:my_each) unless block_given?
+    arr = []
+    my_each do |item|
+      arr.push(yield item)
+    end
+    arr
   end
 
   def my_map_proc(proc = nil)
@@ -114,7 +123,7 @@ module Enumerable
     first_memo.my_each do |i|
       memo = yield(memo, i) if block_given?
     end
-    puts memo
+    memo
   end
 end
 
@@ -131,10 +140,13 @@ my_hash = { one: 'one', two: 'two', three: 'three' }
 my_strings = %w(Morris David Cris Stella)
 
 puts 
-puts my_array.my_count {|i| i == 78}
-puts my_array.my_count2 {|i| i == 78}
+arra = my_array.my_inject {|i| i + 78}
+puts arra.class
+puts arra
 puts "------------"
-puts my_array.count {|i| i == 78}
+arra2 = my_array.inject {|i| i + 78}
+puts arra2.class
+puts arra2
 
 # puts my_strings.my_any?("ssss")
 # puts my_strings.my_any?
