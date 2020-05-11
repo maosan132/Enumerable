@@ -122,7 +122,3 @@ end
 
 # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 # rubocop: enable Metrics/ModuleLength
-
-def multiply_els(arr)
-  arr.my_inject { |memo, i| memo * i }
-end
