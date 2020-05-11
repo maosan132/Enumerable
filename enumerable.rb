@@ -116,31 +116,19 @@ module Enumerable
     end
     memo
   end
-  
-  def my_inject2(memo = 0, operator = nil)  
-    arr = is_a?(Array) || is_a?(Range) ? self : to_a    
-    if memo.is_a?(Symbol)
-      operator = memo
-      memo = 0
-    end
-    if operator.is_a?(Symbol)
-      if operator == :+
-      memo = arr.my_inject(memo) { |acum, i| acum + i }
-      elsif operator == :-
-      memo = arr.my_inject(memo) { |acum, i| acum - i }
-      elsif operator == :*
-      memo = arr.my_inject(memo) { |acum, i| acum * i }
-      elsif operator == :/
-      memo = arr.my_inject(memo) { |acum, i| acum / i }
-      end
+
+  def my_inject3(*arg)
+    memo, operator = nil
+    if arg[0].is_a?(Symbol)
+      operator = arg[0]
+      my_each { |i| memo = (memo ? memo.send(operator, i) : i) }
+    elsif arg.size == 2
+      memo = arg[0]
+      operator = arg[1]
+      my_each { |i| memo = memo.send(operator, i) }
     else
-      if memo.zero?
-        memo = arr[0]
-        arr.shift
-      end
-      arr.my_each do |i|
-        memo = yield(memo, i)
-      end
+      memo = arg[0]
+      my_each { |i| memo = (memo ? yield(memo, i) : i) }
     end
     memo
   end
@@ -161,11 +149,11 @@ my_hash = { one: 'one', two: 'two', three: 'three' }
 my_strings = %w(Morris David Cris Stella)
 
 puts 
-arra = my_range.my_inject2(:+)
+arra = my_array.my_inject3(1000) {|memo, i| memo = i * memo}
 puts arra.class
 puts arra
 puts "------------"
-arra2 = my_range.inject(:+)
+arra2 = my_array.inject(1000) {|memo, i| memo = i * memo}
 puts arra2.class
 puts arra2
 
